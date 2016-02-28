@@ -37,7 +37,7 @@
                             })
                             
                         },
-                        template: "just for fun: here it is again {{ userEnteredNumber }}"
+                        template: "<input type='text' ng-model='userEnteredNumber'> just for fun: here it is again {{ userEnteredNumber }}"
                     } 
                 });
         
@@ -50,10 +50,11 @@
     </head>
     <body>
 
-        <div class="container" ng-controller="myCtrl as ctrl" user-entered-number="ctrl.numberEntered">
+        <div class="container" ng-controller="myCtrl as ctrl">
             <div class="row">
                 <div class="col-sm-8">
-                    Enter a positive integer: <input type="text" positive-integer-field ng-model="ctrl.numberEntered">
+                    <p>Enter a positive integer: <positive-integer-field user-entered-number="ctrl.numberEntered"></positive-integer-field></p>
+                    
                     <p>My friend, you typed in {{ ctrl.numberEntered }}, as Number: {{ ctrl.numberEnteredAsNumber() }}</p>
                     <p>AngularJS tells you again, it is  {{ ctrl.numberEntered }}, and it is of type {{ ctrl.typeOfNumberEntered() }}, as Number: {{ ctrl.numberEnteredAsNumber() }}</p>
                 </div>
