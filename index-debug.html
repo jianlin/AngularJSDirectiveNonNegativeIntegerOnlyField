@@ -23,8 +23,11 @@
                 })
                 .directive("positiveIntegerField", function() {
                     return {    // DDO
-                        restrict: "AE",
-                        scope: { userEnteredNumber: "=" },
+                        
+                        restrict: "A",
+                        
+                        scope: {},
+                        
                         link: function(scope, elem, attrs) {
                             elem.on("keypress", function(ev) {
                                 var which = ev.which;
@@ -36,8 +39,8 @@
                                 }
                             })
                             
-                        },
-                        template: "<input type='text' ng-model='userEnteredNumber'> just for fun: here it is again within the directive {{ userEnteredNumber }}"
+                        }
+                        
                     } 
                 });
         
@@ -53,11 +56,13 @@
         <div class="container" ng-controller="myCtrl as ctrl">
             <div class="row">
                 <div class="col-sm-8">
-                    <p><label>Enter a positive integer: <positive-integer-field user-entered-number="ctrl.numberEntered"></positive-integer-field></label></p>
+                    
+                    <p><label>Enter a positive integer: <input type="text" positive-integer-field ng-model="ctrl.numberEntered"></label></p>
                     
                     <p>My friend, you typed in {{ ctrl.numberEntered }}, as Number: {{ ctrl.numberEnteredAsNumber() }}</p>
                     
-                    <p>AngularJS tells you again, it is  {{ ctrl.numberEntered }}, and it is of type {{ ctrl.typeOfNumberEntered() }}, as Number: {{ ctrl.numberEnteredAsNumber() }}</p>
+                    <p>AngularJS tells you again, it is  {{ ctrl.numberEntered }}, and it is of type {{ ctrl.typeOfNumberEntered() }}, if as Number: {{ ctrl.numberEnteredAsNumber() }}</p>
+                    
                 </div>
                 <div class="col-sm-4">side</div>
             </div>
