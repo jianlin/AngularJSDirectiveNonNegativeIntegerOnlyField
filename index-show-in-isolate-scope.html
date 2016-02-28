@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>AngularJS, jQuery, Bootstrap</title>
+        <script src="js/jquery.js"></script>
+        <script src="js/angular.js"></script>
+        <link rel="stylesheet" href="css/bootstrap.css" media="screen" title="no title" charset="utf-8">
+        <script>
+            angular.module("myApp", [])
+                .controller("myCtrl", function() {
+                    var vm = this;
+                
+                    vm.typeOfNumberEntered = function() {
+                        return typeof vm.numberEntered;
+                    }
+                    
+                    vm.numberEnteredAsNumber = function() {
+                        return +vm.numberEntered;
+                    }
+                    
+                })
+                .directive("positiveIntegerField", function() {
+                    return {    // DDO
+                        restrict: "AE",
+                        scope: { userEnteredNumber: "=" },
+                        link: function(scope, elem, attrs) {
+                            elem.on("keypress", function(ev) {
+                                var which = ev.which;
+                                console.log("user keypress, key is", ev.key, ev.which);
+                                if (which < "0".charCodeAt(0) || which > "9".charCodeAt(0)) {
+                                    // out of range
+                                    console.log("out of range");
+                                    ev.preventDefault();
+                                }
+                            })
+                            
+                        },
+                        template: "just for fun: here it is again {{ userEnteredNumber }}"
+                    } 
+                });
+        
+        
+        </script>
+        
+        <style>
+
+        </style>
+    </head>
+    <body>
+
+        <div class="container" ng-controller="myCtrl as ctrl" user-entered-number="ctrl.numberEntered">
+            <div class="row">
+                <div class="col-sm-8">
+                    Enter a positive integer: <input type="text" positive-integer-field ng-model="ctrl.numberEntered">
+                    <p>My friend, you typed in {{ ctrl.numberEntered }}, as Number: {{ ctrl.numberEnteredAsNumber() }}</p>
+                    <p>AngularJS tells you again, it is  {{ ctrl.numberEntered }}, and it is of type {{ ctrl.typeOfNumberEntered() }}, as Number: {{ ctrl.numberEnteredAsNumber() }}</p>
+                </div>
+                <div class="col-sm-4">side</div>
+            </div>
+        </div>
+
+    </body>
+</html>
