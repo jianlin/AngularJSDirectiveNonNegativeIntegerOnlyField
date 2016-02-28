@@ -21,7 +21,7 @@
                     }
                     
                 })
-                .directive("positiveIntegerField", function() {
+                .directive("nonNegativeIntegerField", function() {
                     return {    // DDO
                         
                         restrict: "A",
@@ -31,10 +31,8 @@
                         link: function(scope, elem, attrs) {
                             elem.on("keypress", function(ev) {
                                 var which = ev.which;
-                                console.log("user keypress, key is", ev.key, ev.which);
                                 if (which < "0".charCodeAt(0) || which > "9".charCodeAt(0)) {
                                     // out of range
-                                    console.log("out of range");
                                     ev.preventDefault();
                                 }
                             })
@@ -57,7 +55,7 @@
             <div class="row">
                 <div class="col-sm-8">
                     
-                    <p><label>Enter a positive integer: <input type="text" positive-integer-field ng-model="ctrl.numberEntered"></label></p>
+                    <p><label>Enter a positive integer: <input type="text" non-negative-integer-field ng-model="ctrl.numberEntered"></label></p> 
                     
                     <p>My friend, you typed in {{ ctrl.numberEntered }}, as Number: {{ ctrl.numberEnteredAsNumber() }}</p>
                     
